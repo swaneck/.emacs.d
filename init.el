@@ -65,7 +65,7 @@
     ("a2e7b508533d46b701ad3b055e7c708323fb110b6676a8be458a758dd8f24e27" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "cdfc5c44f19211cfff5994221078d7d5549eeb9feda4f595a2fd8ca40467776c" "a4c9e536d86666d4494ef7f43c84807162d9bd29b0dfd39bdf2c3d845dcc7b2e" default)))
  '(package-selected-packages
    (quote
-    (markdown-mode flatland-theme zenburn-theme yaml-mode web-mode nlinum anything php-completion php-mode rbenv undo-tree auto-complete))))
+    (auto-highlight-symbol enh-ruby-mode markdown-mode flatland-theme zenburn-theme yaml-mode web-mode nlinum anything php-completion php-mode rbenv undo-tree auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -134,3 +134,34 @@
 
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+
+;;
+;; ruby-mode
+;;
+(autoload 'ruby-mode "ruby-mode"
+   "Mode for editing ruby source files" t)
+  (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+  (add-to-list 'auto-mode-alist '("[Rr]akefile$" . ruby-mode))
+
+;;
+;; ruby-electric
+;;
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook (lambda ()(ruby-electric-mode t)))
+(setq ruby-electric-expand-delimiters-list nil)
+
+;;
+;; ruby-block
+;;
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
+
+;;
+;; auto-highlight-symbol
+;;
+(require 'auto-highlight-symbol)
+(global-auto-highlight-symbol-mode t)
+
